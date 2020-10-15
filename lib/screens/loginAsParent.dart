@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart'; 
 import 'package:schoolkia/widget/bezeirContainer.dart';
 
+import 'home.dart';
+
 // ignore: must_be_immutable
 class ParentLogin extends StatefulWidget {
   ParentLogin({Key key, this.title}) : super(key: key);
@@ -107,30 +109,37 @@ class _LoginPageState extends State<ParentLogin>  {
   }
 
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Colors.blue[100], Colors.blue[300]])),
-      child: Text(
-        'Login',
-        style: TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-            letterSpacing: 1.5),
+   return InkWell(
+
+      onTap: ()
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> MainBoard()));
+      },
+          child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(vertical: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 2)
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.blue[100], Colors.blue[300]])),
+        child: Text(
+          'Login',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              letterSpacing: 1.5),
+        ),
       ),
     );
   }

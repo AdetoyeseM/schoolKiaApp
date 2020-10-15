@@ -1,136 +1,209 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:schoolkia/screens/loginAsParent.dart';
-import 'package:schoolkia/screens/loginAsStudent.dart'; 
+import 'package:schoolkia/widget/bezeirContainer.dart';
 
-class Homepage extends StatefulWidget {
-  Homepage({Key key, this.title}) : super(key: key);
+import 'initial.dart';
 
-  final String title;
-
+class MainBoard extends StatefulWidget {
   @override
-  _WelcomePageState createState() => _WelcomePageState();
+  _MainBoard createState() => _MainBoard();
 }
 
-class _WelcomePageState extends State<Homepage> {
-  Widget _studentButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => StudentLogin()));
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.blue[300].withAlpha(100),
-                  offset: Offset(2, 4),
-                  blurRadius: 8,
-                  spreadRadius: 2)
-            ],
-            color: Colors.white),
-        child: Text(
-          'Login As Student',
-          style: TextStyle(fontSize: 16, color: Colors.blue[300], fontWeight: FontWeight.w400, letterSpacing: 1.5
-        ),
-      ),
-      )
-        );
-  }
-
-  Widget _parentButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ParentLogin()));
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          border: Border.all(color: Colors.white, width: 2),
-        ),
-        child: Text(
-          'Login As Parent',
-          style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 1.5),
-        ),
-      ),
-    );
-  } 
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'Wel',  
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.headline4,
-            fontSize: 30,
-            letterSpacing: 5.0,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-          children: [
-            TextSpan(
-              text: 'C',
-              
-              style: TextStyle(color: Colors.black, fontSize: 30, letterSpacing: 5),
-            ),
-            TextSpan(
-              text: 'ome',
-              style: TextStyle(color: Colors.white, fontSize: 30, letterSpacing: 5),
-            ),
-          ]),
-    );
-  }
-
+class _MainBoard extends State<MainBoard> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body:SingleChildScrollView(
-        child:Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: Colors.grey.shade200,
-                      offset: Offset(2, 4),
-                      blurRadius: 5,
-                      spreadRadius: 2)
-                ],
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.blue[100], 
-                    
-                    Colors.blue[300]])),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _title(),
-                SizedBox(
-                  height: 80,
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Colors.white,
+      //   leading: Icon(Icons.menu, color: Colors.black),
+      // ),
+      backgroundColor: Colors.white,
+      body: Container(
+        height: height,
+        child: SafeArea(
+          child: Stack(children: <Widget>[
+            Positioned(
+                top: -height * .15,
+                right: -MediaQuery.of(context).size.width * .4,
+                child: BezierContainer()),
+            Container(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        
+                        Icon(Icons.menu_outlined),
+                        Column(
+                          children: [
+                            Text(
+                              "Welcome,",
+                              style: TextStyle(
+                                  fontSize: 28,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              "John",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 40),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildItemMenu("assets/elaerning.jpg", "E-Learning"),
+                        buildItemMenu("assets/result.png", "Student Result"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildItemMenu("assets/bill.png", "Bills"),
+                        buildItemMenu("assets/payment.jpg", "Payment History"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildItemMenu("assets/forum.png", "Forum"),
+                        buildItemMenu("assets/coins.png", "Tokens"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildItemMenu("assets/corres.png", "Correspondences"),
+                        buildItemMenu("assets/lock.jpg", "Change Password"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text("Current orders (3)",style: TextStyle(fontSize: 19,fontWeight: FontWeight.w500,color: Colors.grey[700]),),
+                    //     Text("View all",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w400,color: Colors.blue),),
+                    //   ],
+                    // ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   decoration: BoxDecoration(
+                    //       color: Colors.white,
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: Colors.grey,
+                    //         blurRadius: 3,
+                    //         offset: Offset(0,1)
+                    //       )
+                    //     ]
+                    //   ),
+                    // child: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //   children: [
+
+                    //     Container(
+                    //       margin: EdgeInsets.symmetric(vertical: 6),
+                    //       padding: EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+                    //       decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(30),
+                    //         color: Colors.white,
+                    //         boxShadow: [
+                    //           BoxShadow(
+                    //             color: Colors.grey,
+                    //             offset: Offset(0,1),
+                    //             blurRadius: 1
+                    //           )
+                    //         ]
+                    //       ),
+                    //       child: ClipRRect(
+                    //         child: Image.asset("assets/images/delivery-truck.png",height: 40,),
+                    //         borderRadius: BorderRadius.circular(20),
+
+                    //         ),
+                    //     ),
+                    //     Column(
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: [
+                    //         Text("Order No : #1234567890",style: TextStyle(fontWeight: FontWeight.w500),),
+                    //         Text("Out of delivery",style: TextStyle(color: Colors.blue),),
+                    //       ],
+                    //     )
+                    //   ],
+                    // ),
+                  ],
                 ),
-                _studentButton(),
-                SizedBox(
-                  height: 20,
-                ),
-                _parentButton(),
-                SizedBox(
-                  height: 20,
-                ),
-                // _label()
-              ],
+              ),
             ),
-          ),
+          ]),
+        ),
+      ),
+    );
+  }
+
+  Widget buildItemMenu(String image, String text) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => InitialPage()));
+      },
+      child: Container(
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 7,
+            offset: Offset(0, 2), // changes position of shadow
+          )
+        ], color: Colors.white, borderRadius: BorderRadius.circular(8)),
+        child: Column(
+          children: [
+            ClipRect(
+                child: Image.asset(
+              image,
+              width: 100,
+              height: 70,
+              fit: BoxFit.contain,
+            )),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              text,
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black54),
+            ),
+          ],
+        ),
       ),
     );
   }

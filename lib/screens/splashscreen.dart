@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart'; 
-import 'package:schoolkia/screens/home.dart';
+import 'package:flutter/material.dart';  
 import 'dart:async';
+
+import 'initial.dart';
  
 
 class Splash extends StatefulWidget {
@@ -22,7 +23,7 @@ class _State extends State<Splash> with SingleTickerProviderStateMixin {
 
   void navigationPage() {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Homepage()));
+        .push(MaterialPageRoute(builder: (context) => InitialPage()));
   }
 
   @override
