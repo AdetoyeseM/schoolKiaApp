@@ -1,6 +1,12 @@
 # schoolkia
 
-A new Flutter project.
+Schoolkia is a School Management App  with features not limited to:
+
+- Payment of fees
+- Online Classes
+- Forums and correspondences
+- Attendance
+
 
 ## Getting Started
 
